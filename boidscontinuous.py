@@ -1,3 +1,8 @@
+import numpy as np
+import matplotlib.pyplot as m
+import math as math
+import random as r
+
 #Particle class definition
 class particle:
     noise=0.6
@@ -93,15 +98,15 @@ class boite:
 #Main program                                  
 #global variables
 global N,L,lbox,n,dt,n2
-N=100
-L=17
+N=500
+L=60
 lbox=1
 n=L/lbox
 n2=n*n                  
 dt=0.05
-exit_fig=10
+exit_fig=30
 tau=1.0
-passos=2500
+passos=25000
 
 #initialize N particles
 
@@ -141,12 +146,12 @@ while(t<passos*dt):
     if(intt%exit_fig==0):
         print(t)
         m.axis([0,L,0,L])
-        x,y,vx,vy=[],[],[],[]
+        x,y,nx,ny=[],[],[],[]
         map(lambda i:x.append(i.r[0]), part)
         map(lambda i:y.append(i.r[1]), part)
-        map(lambda i:vx.append(i.v[0]), part)
-        map(lambda i:vy.append(i.v[1]), part)
-        m.quiver(x,y,vx,vy)
+        map(lambda i:nx.append(i.n[0]), part)
+        map(lambda i:ny.append(i.n[1]), part)
+        m.quiver(x,y,nx,ny)
         name=str(figindex)+".png"
         m.savefig(name, bbox_inches='tight')
         figindex+=1
